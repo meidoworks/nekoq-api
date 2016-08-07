@@ -5,14 +5,14 @@ import (
 	"fmt"
 )
 
-var _ error = nestedError{}
+var _ error = &nestedError{}
 
 type nestedError struct {
 	message string
 	cause   error
 }
 
-func (this nestedError) Error() string {
+func (this *nestedError) Error() string {
 	if this.cause == nil {
 		return fmt.Sprintln(this.message)
 	} else {
@@ -25,7 +25,7 @@ func New(message string) error {
 }
 
 func NewNested(message string, cause error) error {
-	n := nestedError{
+	n := &nestedError{
 		message: message,
 		cause:   cause,
 	}
