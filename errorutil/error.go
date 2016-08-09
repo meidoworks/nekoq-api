@@ -1,7 +1,7 @@
-package errors
+package errorutil
 
 import (
-	goerrors "errors"
+	"errors"
 	"fmt"
 )
 
@@ -21,7 +21,7 @@ func (this *nestedError) Error() string {
 }
 
 func New(message string) error {
-	return goerrors.New(message)
+	return errors.New(message)
 }
 
 func NewNested(message string, cause error) error {
