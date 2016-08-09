@@ -3,6 +3,7 @@ package rpc
 import (
 	"import.moetang.info/go/nekoq-api/ctx"
 	"import.moetang.info/go/nekoq-api/errorutil"
+	"import.moetang.info/go/nekoq-api/future"
 )
 
 type Param struct {
@@ -11,9 +12,14 @@ type Param struct {
 	Context *ctx.RpcContext
 }
 
+type rpcCall interface {
+	Call(param Param, response interface{}) (timeout bool, err error)
+	CallReturning(param Param) (result interface{}, timeout bool, err error)
+	AsyncCallReturning(param Param) (future future.Future, timeout bool, err error)
+}
+
 type Client interface {
-	Call(param Param, response interface{}) error
-	CallWithReturning(param Param) (interface{}, error)
+	rpcCall
 }
 
 func NewClient(name string) (Client, error) {
