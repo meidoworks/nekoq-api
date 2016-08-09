@@ -12,6 +12,11 @@ type Param struct {
 	Context *ctx.RpcContext
 }
 
+type Result struct {
+	Response     interface{}
+	CalleeNodeId string
+}
+
 type rpcCall interface {
 	Call(param Param, response interface{}) (timeout bool, err error)
 	CallReturning(param Param) (result interface{}, timeout bool, err error)
