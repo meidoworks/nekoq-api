@@ -1,9 +1,10 @@
 package ctx
 
 type Context struct {
-	TraceId string
-	RpcId   string
-	Data    map[string]string
+	TraceId   string
+	RpcId     string
+	Data      map[string]string
+	TimeLimit TimeLimit
 }
 
 type RpcContext struct {
