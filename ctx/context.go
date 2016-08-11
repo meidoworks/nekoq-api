@@ -1,16 +1,18 @@
 package ctx
 
 type Context struct {
-	TraceId   string
-	RpcId     string
-	Data      map[string]string
-	TimeLimit TimeLimit
+	RequestId string            `ctxfield:"requestId"`
+	RpcId     string            `ctxfield:"rpcId"`
+	Data      map[string]string `ctxfield:"data"`
+	TimeLimit TimeLimit         `ctxfield:"timeLimit"`
+	TTL       byte              `ctxfield:"ttl"`
 }
 
 type RpcContext struct {
-	TraceId      string
-	RpcId        string
-	Data         map[string]string
-	AppName      string
-	CallerNodeId string // automatic filled by Client not by caller
+	RequestId    string            `ctxfield:"requestId"`
+	RpcId        string            `ctxfield:"rpcId"`
+	Data         map[string]string `ctxfield:"data"`
+	AppName      string            `ctxfield:"appName"`
+	CallerNodeId string            `ctxfield:"callerNodeId"` // automatic filled by Client not by caller
+	TTL          byte              `ctxfield:"ttl"`
 }

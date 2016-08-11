@@ -1,8 +1,8 @@
 package ctx
 
 type TimeLimit struct {
-	CurrentTimeMillis uint64
-	DeadlineMillis    uint64
+	CurrentTimeMillis uint64 `ctxfield:"currentTimeMillis"`
+	DeadlineMillis    uint64 `ctxfield:"deadlineMillis"`
 }
 
 func (this *TimeLimit) SetCurrentTimeMillis(t uint64) (shouldAccept bool) {
