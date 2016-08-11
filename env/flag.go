@@ -15,6 +15,13 @@ func init() {
 	flag.StringVar(&appname, "appname", "", "AppName of application. e.g. -appname=nekoq")
 	flag.StringVar(&nodeid, "node", "", "Unique Node Id of application. e.g. -node=nekoq001")
 	flag.Parse()
+	ensure, found := os.LookupEnv("NEKO_NOT_ENSURE_ENV")
+	if found && ensure == "true" {
+		return
+	} else {
+		EnsureEnvFlag()
+		return
+	}
 }
 
 func EnsureEnvFlag() {
