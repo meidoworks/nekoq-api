@@ -8,8 +8,13 @@ import (
 var _ error = &nestedError{}
 
 type nestedError struct {
-	message string
-	cause   error
+	message   string
+	errorCode string
+	cause     error
+}
+
+func (this *nestedError) ErrorCode() string {
+	return this.errorCode
 }
 
 func (this *nestedError) Error() string {
@@ -22,6 +27,14 @@ func (this *nestedError) Error() string {
 
 func New(message string) error {
 	return errors.New(message)
+}
+
+func NewWithErrorCode(errorCode, message string) error {
+	return &nestedError{
+		message:   message,
+		errorCode: errorCode,
+		cause:     nil,
+	}
 }
 
 func NewNested(message string, cause error) error {
