@@ -1,18 +1,45 @@
 package rpc
 
 import (
+	"fmt"
 	"sync"
 	"sync/atomic"
 	"unsafe"
+
+	"import.moetang.info/go/nekoq-api/errorutil"
 )
 
 var (
 	clientImplMap    = make(map[string]Client)
 	clientLock       = &sync.Mutex{}
 	tmpClientImplMap map[string]Client
+
+	clientFactoryMap    = make(map[string]ClientFactory)
+	clientFactoryLock   = &sync.Mutex{}
+	tmpClientFactoryMap map[string]ClientFactory
 )
 
-func RegisterClientImpl(name string, client Client) {
+func RegisterClientFactory(name string, clientFactory ClientFactory) error {
+	_, ok := clientFactoryMap[name]
+	if ok {
+		return errorutil.NewWithErrorCode("NEKO_RPC_DUPLICATED_CLIENT", fmt.Sprint("client:", name, "exists."))
+	}
+	clientFactoryLock.Lock()
+	// must be assigned to a global field
+	tmpClientFactoryMap = make(map[string]ClientFactory)
+	for k, v := range clientFactoryMap {
+		tmpClientFactoryMap[k] = v
+	}
+	tmpClientFactoryMap[name] = clientFactory
+	orgiPtr := (*uintptr)(unsafe.Pointer(&clientFactoryMap))
+	newPtr := (*uintptr)(unsafe.Pointer(&tmpClientFactoryMap))
+	atomic.StoreUintptr(orgiPtr, *newPtr)
+	tmpClientFactoryMap = nil
+	clientFactoryLock.Unlock()
+	return nil
+}
+
+func registerClientImpl(name string, client Client) {
 	clientLock.Lock()
 	// must be assigned to a global field
 	tmpClientImplMap = make(map[string]Client)

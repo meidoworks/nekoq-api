@@ -27,6 +27,10 @@ type Client interface {
 	rpcCall
 }
 
+type ClientFactory interface {
+	CreateClient() Client
+}
+
 func NewClient(name string) (Client, error) {
 	c, ok := clientImplMap[name]
 	if ok {
