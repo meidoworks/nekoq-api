@@ -14,5 +14,5 @@ node - NodeId
 ##### package: env - don't ensure env flags when load 'env' package
 
 ```
-NEKO_NOT_ENSURE_ENV=false
+NEKO_NOT_ENSURE_ENV=true
 ```
