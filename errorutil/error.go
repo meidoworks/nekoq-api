@@ -21,7 +21,7 @@ func (this *nestedError) Error() string {
 	if this.cause == nil {
 		return fmt.Sprintln(this.message)
 	} else {
-		return fmt.Sprintln(this.message, "\n caused by: ", this.cause.Error())
+		return fmt.Sprintln(this.message, "\n  caused by: ", this.cause.Error())
 	}
 }
 
