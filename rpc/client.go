@@ -28,7 +28,7 @@ type Client interface {
 }
 
 type ClientFactory interface {
-	CreateClient() Client
+	CreateClient() (Client, error)
 }
 
 func NewClient(name string) (Client, error) {

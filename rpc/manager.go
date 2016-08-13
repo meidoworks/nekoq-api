@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"import.moetang.info/go/nekoq-api/errorutil"
+	"os"
 )
 
 var (
@@ -17,6 +18,8 @@ var (
 	clientFactoryMap    = make(map[string]ClientFactory)
 	clientFactoryLock   = &sync.Mutex{}
 	tmpClientFactoryMap map[string]ClientFactory
+
+	initLock = &sync.Mutex{}
 )
 
 func RegisterClientFactory(name string, clientFactory ClientFactory) error {
@@ -52,4 +55,26 @@ func registerClientImpl(name string, client Client) {
 	atomic.StoreUintptr(orgiPtr, *newPtr)
 	tmpClientImplMap = nil
 	clientLock.Unlock()
+}
+
+func InitClient() {
+	initLock.Lock()
+	for k, _ := range enabledService {
+		_, exists := clientImplMap[k]
+		if exists {
+			continue
+		}
+		factory, exists := clientFactoryMap[k]
+		if !exists {
+			fmt.Fprintln(os.Stderr, errorutil.New("no such service mapped to: "+k))
+			os.Exit(-114)
+		}
+		c, err := factory.CreateClient()
+		if err != nil {
+			fmt.Fprintln(os.Stderr, errorutil.NewNested("create client error.", err))
+			os.Exit(-115)
+		}
+		registerClientImpl(k, c)
+	}
+	initLock.Unlock()
 }
