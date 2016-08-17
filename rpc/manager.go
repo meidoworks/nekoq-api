@@ -5,9 +5,9 @@ import (
 	"sync"
 	"sync/atomic"
 	"unsafe"
+	"os"
 
 	"import.moetang.info/go/nekoq-api/errorutil"
-	"os"
 )
 
 var (

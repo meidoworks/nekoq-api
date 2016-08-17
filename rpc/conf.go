@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"import.moetang.info/go/nekoq-api/errorutil"
 	"io/ioutil"
 	"os"
+
+	"import.moetang.info/go/nekoq-api/errorutil"
 )
 
 var confFilePath string
