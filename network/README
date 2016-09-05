@@ -1,0 +1,3 @@
+NOTE:
+1. inbound: []byte event fired. pipeline accumulation.
+2. outbound: obj to []byte converting in pipeline. obj splits into multi out-of-order writable packet.
