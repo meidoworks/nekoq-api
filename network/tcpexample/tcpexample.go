@@ -25,7 +25,7 @@ func ClientExample(tcpConnStr string, timeout time.Duration) error {
 	}
 
 	defualtHandler := ClientHandler{}
-	channel := tcp.NewTcpChannel(tcpConn, defualtHandler, new(tcp.TcpChannelOption))
+	channel, _ := tcp.NewTcpChannel(tcpConn, defualtHandler, new(tcp.TcpChannelOption))
 
 	// write
 	channel.Write(network.NewSimpleWriteEvent([]byte("GET / HTTP/1.1\r\nHost: localhost\r\nConnection: Close\r\n\r\n")))

@@ -2,10 +2,10 @@ package rpc
 
 import (
 	"fmt"
+	"os"
 	"sync"
 	"sync/atomic"
 	"unsafe"
-	"os"
 
 	"import.moetang.info/go/nekoq-api/errorutil"
 )

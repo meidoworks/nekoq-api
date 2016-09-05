@@ -10,7 +10,19 @@ import (
 
 	"import.moetang.info/go/nekoq-api/errorutil"
 	"import.moetang.info/go/nekoq-api/network"
+	"import.moetang.info/go/nekoq-api/workpool"
 )
+
+var wp workPool
+
+func init() {
+	var tmp interface{} = workpool.NewOrGetWorkPool("tcp.network.nekoq-api", 10*1024*1024)
+	wp = tmp.(workPool)
+}
+
+type workPool interface {
+	RunUnsafe(rName string, f func()) error
+}
 
 type wrappedTcpWriter interface {
 	io.Writer
@@ -38,7 +50,7 @@ func (this *TcpChannelOption) GetWriteQueueSize() int {
 	}
 }
 
-func NewTcpChannel(tcpConn *net.TCPConn, handler network.ChannelRawSideHandler, option *TcpChannelOption) network.Channel {
+func NewTcpChannel(tcpConn *net.TCPConn, handler network.ChannelRawSideHandler, option *TcpChannelOption) (network.Channel, error) {
 	tcpCh := &tcpChannel{
 		tcpConn:               tcpConn,
 		buf:                   make([]byte, option.GetReadBufferSize()),
@@ -52,12 +64,19 @@ func NewTcpChannel(tcpConn *net.TCPConn, handler network.ChannelRawSideHandler, 
 	}
 	tcpCh.bufWriter = network.WrapWriterAndFlush(bufio.NewWriter(tcpConn), tcpCh, handler)
 
-	go tcpCh.inboundTask()
-	go tcpCh.outboundTask()
+	err := wp.RunUnsafe(fmt.Sprint("tcp-inbound={", "r:", tcpConn.RemoteAddr(), ",l:", tcpConn.LocalAddr(), "}"), tcpCh.inboundTask)
+	if err != nil {
+		return err
+	}
+	err = wp.RunUnsafe(fmt.Sprint("tcp-outbound={", "r:", tcpConn.RemoteAddr(), ",l:", tcpConn.LocalAddr(), "}"), tcpCh.outboundTask)
+	if err != nil {
+		//TODO clean tasks
+		return err
+	}
 
 	handler.Active(tcpCh)
 
-	return tcpCh
+	return tcpCh, nil
 }
 
 type tcpChannel struct {

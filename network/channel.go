@@ -124,9 +124,12 @@ func (DefaultChannelRawSideHandler) OnRead(ch Channel, data []byte) {
 }
 
 func (DefaultChannelRawSideHandler) OnError(channel Channel, eventType EVENT_TYPE, err error) {
-	if eventType == EVENT_READ && channel.IsActive() {
-		log.Println("default handler:", err)
-		channel.Close()
+	switch eventType {
+	case EVENT_READ:
+		if channel.IsActive() {
+			log.Println("default handler:", err)
+			channel.Close()
+		}
 	}
 }
 
