@@ -22,3 +22,8 @@ func (this TimeLimit) CalculateRestTimeMillis() uint64 {
 	}
 	return t
 }
+
+type TTL struct {
+	CurrentTTL byte
+	MaxTTL     byte
+}
