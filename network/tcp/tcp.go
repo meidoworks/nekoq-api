@@ -66,12 +66,12 @@ func NewTcpChannel(tcpConn *net.TCPConn, handler network.ChannelRawSideHandler, 
 
 	err := wp.RunUnsafe(fmt.Sprint("tcp-inbound={", "r:", tcpConn.RemoteAddr(), ",l:", tcpConn.LocalAddr(), "}"), tcpCh.inboundTask)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	err = wp.RunUnsafe(fmt.Sprint("tcp-outbound={", "r:", tcpConn.RemoteAddr(), ",l:", tcpConn.LocalAddr(), "}"), tcpCh.outboundTask)
 	if err != nil {
 		//TODO clean tasks
-		return err
+		return nil, err
 	}
 
 	handler.Active(tcpCh)
