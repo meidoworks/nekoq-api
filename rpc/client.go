@@ -1,6 +1,8 @@
 package rpc
 
 import (
+	"reflect"
+
 	"import.moetang.info/go/nekoq-api/ctx"
 	"import.moetang.info/go/nekoq-api/errorutil"
 	"import.moetang.info/go/nekoq-api/future"
@@ -18,9 +20,8 @@ type Result struct {
 }
 
 type rpcCall interface {
-	Call(param Param, response interface{}) (timeout bool, err error)
-	CallReturning(param Param) (result interface{}, timeout bool, err error)
-	AsyncCallReturning(param Param) (future future.Future, timeout bool, err error)
+	Call(param Param, resultPtr interface{}) (timeout bool, err error)
+	AsyncCall(param Param, resultPtr interface{}) (future future.Future, err error)
 }
 
 type Client interface {
@@ -28,6 +29,7 @@ type Client interface {
 }
 
 type ClientFactory interface {
+	PreRegisterMethod(methodName string, in reflect.Type, out reflect.Type) error
 	CreateClient() (Client, error)
 }
 
