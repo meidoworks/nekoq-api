@@ -30,7 +30,7 @@ type Client interface {
 
 type ClientFactory interface {
 	PreRegisterMethod(methodName string, in reflect.Type, out reflect.Type) error
-	CreateClient() (Client, error)
+	CreateClient(config map[string]string) (Client, error)
 }
 
 func NewClient(name string) (Client, error) {

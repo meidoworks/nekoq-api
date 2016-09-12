@@ -12,13 +12,13 @@ import (
 
 var confFilePath string
 var serviceConfig *ServiceConfig
-var enabledService map[string]map[string]bool
+var enabledService map[string]ServiceItem
 
 func init() {
 	flag.StringVar(&confFilePath, "rpcfile", "", "Rpc configuration file path. -rpcfile=services.conf")
 	flag.Parse()
 	serviceConfig = &ServiceConfig{}
-	enabledService = make(map[string]map[string]bool)
+	enabledService = make(map[string]ServiceItem)
 	if confFilePath != "" {
 		initConfig()
 	}
@@ -53,11 +53,7 @@ func initConfig() {
 	}
 	for _, v := range serviceConfig.Services {
 		if v.Enable {
-			m := make(map[string]bool)
-			enabledService[v.ServiceName] = m
-			for _, item := range v.Method {
-				m[item] = true
-			}
+			enabledService[v.ServiceName] = v
 		}
 	}
 }

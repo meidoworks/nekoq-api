@@ -101,14 +101,14 @@ func InitClient() {
 
 		// check method registered!!!
 		mMap := methodMap[k]
-		for methodName, _ := range v {
+		for _, methodName := range v.Method {
 			if _, ok := mMap[methodName]; !ok {
 				fmt.Fprintln(os.Stderr, errorutil.New("no such method:"+methodName+" mapped to: "+k))
 				os.Exit(-116)
 			}
 		}
 
-		c, err := factory.CreateClient()
+		c, err := factory.CreateClient(v.Config)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, errorutil.NewNested("create client error.", err))
 			os.Exit(-115)
