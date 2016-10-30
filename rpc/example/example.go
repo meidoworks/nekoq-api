@@ -23,7 +23,7 @@ func ExampleRpcClientUsage() {
 	rpc.InitClient()
 
 	// usage
-	c, err := rpc.NewClient("demoService")
+	c, err := rpc.GetClient("demoService")
 	if err != nil {
 		fmt.Println("new client error.", err)
 	}

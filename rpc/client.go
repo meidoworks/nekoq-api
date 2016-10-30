@@ -33,7 +33,7 @@ type ClientFactory interface {
 	CreateClient(config map[string]string) (Client, error)
 }
 
-func NewClient(name string) (Client, error) {
+func GetClient(name string) (Client, error) {
 	c, ok := clientImplMap[name]
 	if ok {
 		return c, nil
