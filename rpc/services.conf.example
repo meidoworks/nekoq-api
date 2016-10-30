@@ -3,7 +3,10 @@
     {
       "name": "service.example",
       "methods": ["m1", "m2"],
-      "config": {},
+      "config": {
+        "clientTimeout": "2000",
+        "maxConcurrentRequests": "100"
+      },
       "enable": true
     }
   ]
