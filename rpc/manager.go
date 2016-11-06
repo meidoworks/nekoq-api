@@ -13,9 +13,9 @@ import (
 )
 
 var (
-	clientImplMap    = make(map[string]Client)
+	clientImplMap    = make(map[string]FullClient)
 	clientLock       = &sync.Mutex{}
-	tmpClientImplMap map[string]Client
+	tmpClientImplMap map[string]FullClient
 
 	methodMap = make(map[string]map[string]bool)
 
@@ -71,10 +71,10 @@ func RegisterClientFactory(name string, clientFactory ClientFactory) {
 	clientFactoryLock.Unlock()
 }
 
-func registerClientImpl(name string, client Client) {
+func registerClientImpl(name string, client FullClient) {
 	clientLock.Lock()
 	// must be assigned to a global field
-	tmpClientImplMap = make(map[string]Client)
+	tmpClientImplMap = make(map[string]FullClient)
 	for k, v := range clientImplMap {
 		tmpClientImplMap[k] = v
 	}

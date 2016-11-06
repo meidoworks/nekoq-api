@@ -44,7 +44,7 @@ func (this *EmptyClientFactory) PreRegisterMethod(methodName string, in reflect.
 	return nil
 }
 
-func (this *EmptyClientFactory) CreateClient(config map[string]string) (rpc.Client, error) {
+func (this *EmptyClientFactory) CreateClient(config map[string]string) (rpc.FullClient, error) {
 	fmt.Println("new client")
 	return &EmptyClient{
 		allowed: this.allowed,

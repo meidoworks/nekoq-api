@@ -28,9 +28,13 @@ type Client interface {
 	rpcCall
 }
 
+type FullClient interface {
+	Client
+}
+
 type ClientFactory interface {
 	PreRegisterMethod(methodName string, in reflect.Type, out reflect.Type) error
-	CreateClient(config map[string]string) (Client, error)
+	CreateClient(config map[string]string) (FullClient, error)
 }
 
 func GetClient(name string) (Client, error) {
