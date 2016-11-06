@@ -15,7 +15,7 @@ var serviceConfig *ServiceConfig
 var enabledService map[string]ServiceItem
 
 func init() {
-	flag.StringVar(&confFilePath, "rpcfile", "", "Rpc configuration file path. -rpcfile=services.conf")
+	flag.StringVar(&confFilePath, "rpcfile", "services.conf", "Rpc configuration file path. -rpcfile=services.conf")
 	flag.Parse()
 	serviceConfig = &ServiceConfig{}
 	enabledService = make(map[string]ServiceItem)
