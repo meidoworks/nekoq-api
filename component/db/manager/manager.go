@@ -9,6 +9,7 @@ import (
 
 type DbApi interface {
 	GetSimpleDb() (db.SimpleDB, error)
+	GetAtomicDb() (db.AtomicDB, error)
 	CloseDbApi() error
 }
 
