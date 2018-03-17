@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"import.moetang.info/go/nekoq-api/errorutil"
+	"goimport.moetang.info/nekoq-api/errorutil"
 )
 
 var confFilePath string

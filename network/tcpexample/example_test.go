@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"import.moetang.info/go/nekoq-api/network/tcpexample"
+	"goimport.moetang.info/nekoq-api/network/tcpexample"
 )
 
 func TestClientExample(t *testing.T) {

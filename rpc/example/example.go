@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"reflect"
 
-	"import.moetang.info/go/nekoq-api/errorutil"
-	"import.moetang.info/go/nekoq-api/future"
-	"import.moetang.info/go/nekoq-api/rpc" // load rpc package
+	"goimport.moetang.info/nekoq-api/errorutil"
+	"goimport.moetang.info/nekoq-api/future"
+	"goimport.moetang.info/nekoq-api/rpc" // load rpc package
 )
 
 func ExampleRpcClientUsage() {

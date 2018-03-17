@@ -8,9 +8,9 @@ import (
 	"runtime"
 	"sync/atomic"
 
-	"import.moetang.info/go/nekoq-api/errorutil"
-	"import.moetang.info/go/nekoq-api/network"
-	"import.moetang.info/go/nekoq-api/workpool"
+	"goimport.moetang.info/nekoq-api/errorutil"
+	"goimport.moetang.info/nekoq-api/network"
+	"goimport.moetang.info/nekoq-api/workpool"
 )
 
 var wp workPool

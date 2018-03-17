@@ -3,7 +3,7 @@ package rpc
 import (
 	"sync"
 
-	"import.moetang.info/go/nekoq-api/errorutil"
+	"goimport.moetang.info/nekoq-api/errorutil"
 )
 
 var serverFactories = make(map[string]ServerFactory)
