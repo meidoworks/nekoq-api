@@ -3,7 +3,7 @@ package errorutil_test
 import (
 	"testing"
 
-	"goimport.moetang.info/nekoq-api/errorutil"
+	"github.com/meidoworks/nekoq-api/errorutil"
 )
 
 func TestError(t *testing.T) {

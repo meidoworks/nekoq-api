@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"time"
 )
 
 var (
@@ -26,11 +27,13 @@ func init() {
 
 func EnsureEnvFlag() {
 	if appname == "" {
-		fmt.Fprintln(os.Stderr, "Please set AppName using flag '-appname'.")
-		os.Exit(-101)
+		_, _ = fmt.Fprintln(os.Stderr, "Please set AppName using flag '-appname'.")
+		n := time.Now()
+		appname = fmt.Sprintf("sampleapp_%d", n.Unix())
 	}
 	if nodeid == "" {
-		fmt.Fprintln(os.Stderr, "Please set NodeId using flag '-node'.")
-		os.Exit(-102)
+		_, _ = fmt.Fprintln(os.Stderr, "Please set NodeId using flag '-node'.")
+		n := time.Now()
+		appname = fmt.Sprintf("samplenode_%d", n.Unix())
 	}
 }

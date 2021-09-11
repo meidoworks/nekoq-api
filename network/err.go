@@ -1,6 +1,6 @@
 package network
 
-import "goimport.moetang.info/nekoq-api/errorutil"
+import "github.com/meidoworks/nekoq-api/errorutil"
 
 var _ERROR_CHANNEL_CLOSED = errorutil.New("channel closed <- network <- nekoq-api")
 

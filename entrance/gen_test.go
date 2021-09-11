@@ -3,7 +3,7 @@ package entrance_test
 import (
 	"testing"
 
-	"goimport.moetang.info/nekoq-api/entrance"
+	"github.com/meidoworks/nekoq-api/entrance"
 )
 
 func TestGenerateRequestId(t *testing.T) {

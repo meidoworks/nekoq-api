@@ -5,9 +5,9 @@ import (
 	"net"
 	"time"
 
-	"goimport.moetang.info/nekoq-api/errorutil"
-	"goimport.moetang.info/nekoq-api/network"
-	"goimport.moetang.info/nekoq-api/network/tcp"
+	"github.com/meidoworks/nekoq-api/errorutil"
+	"github.com/meidoworks/nekoq-api/network"
+	"github.com/meidoworks/nekoq-api/network/tcp"
 )
 
 func ServerExample() {

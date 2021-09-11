@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"unsafe"
 
-	"goimport.moetang.info/nekoq-api/errorutil"
+	"github.com/meidoworks/nekoq-api/errorutil"
 )
 
 var (

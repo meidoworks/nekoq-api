@@ -3,9 +3,9 @@ package rpc
 import (
 	"reflect"
 
-	"goimport.moetang.info/nekoq-api/ctx"
-	"goimport.moetang.info/nekoq-api/errorutil"
-	"goimport.moetang.info/nekoq-api/future"
+	"github.com/meidoworks/nekoq-api/ctx"
+	"github.com/meidoworks/nekoq-api/errorutil"
+	"github.com/meidoworks/nekoq-api/future"
 )
 
 type Param struct {

@@ -5,7 +5,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"goimport.moetang.info/nekoq-api/errorutil"
+	"github.com/meidoworks/nekoq-api/errorutil"
 )
 
 var lock *sync.RWMutex = new(sync.RWMutex)

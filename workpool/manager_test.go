@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"goimport.moetang.info/nekoq-api/workpool"
+	"github.com/meidoworks/nekoq-api/workpool"
 )
 
 func TestNewOrGetWorkPool(t *testing.T) {

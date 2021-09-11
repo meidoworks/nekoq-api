@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"goimport.moetang.info/nekoq-api/env"
+	"github.com/meidoworks/nekoq-api/env"
 )
 
 func GenerateRequestId() string {

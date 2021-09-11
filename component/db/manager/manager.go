@@ -3,8 +3,8 @@ package manager
 import (
 	"sync"
 
-	"goimport.moetang.info/nekoq-api/component/db"
-	"goimport.moetang.info/nekoq-api/errorutil"
+	"github.com/meidoworks/nekoq-api/component/db"
+	"github.com/meidoworks/nekoq-api/errorutil"
 )
 
 type DbApi interface {
