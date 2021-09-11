@@ -25,3 +25,6 @@ _testmain.go
 
 #idea
 /.idea
+
+# go mod
+/go.sum
